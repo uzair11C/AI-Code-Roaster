@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    color: #f0f0f0;
+}
+
+.row-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-footer-pad {
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 2%;
+}
+
+.gradient-button {
+    background: linear-gradient(71.21deg, #1900fb -22.76%, #0070d9 87.66%);
+}
