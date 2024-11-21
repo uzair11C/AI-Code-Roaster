@@ -8,9 +8,13 @@ function App() {
     return (
         <Box
             sx={{
-                minHeight: "100vh",
+                height: "100vh",
                 position: "relative",
-                overflow: "hidden",
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-evenly",
+                alignItems: "center",
                 "&::before": {
                     content: '""',
                     position: "absolute",
@@ -29,7 +33,7 @@ function App() {
         >
             <RoastHeader />
             <Body />
-            <Box className="column-center">
+            <Box className="column-center" sx={{ width: "100%" }}>
                 <Tip />
                 <Footer />
             </Box>

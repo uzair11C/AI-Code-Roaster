@@ -10,6 +10,20 @@ body {
     align-items: center;
 }
 
+.row-xStart-yCenter {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.column-xStart-yCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .column-center {
     display: flex;
     flex-direction: column;
