@@ -2,6 +2,7 @@ import {
     Avatar,
     Box,
     Button,
+    CircularProgress,
     Divider,
     Stack,
     TextField,
@@ -9,6 +10,9 @@ import {
     useMediaQuery,
     useTheme,
 } from "@mui/material";
+import { useState } from "react";
+import { generateRoast } from "../../Gemini";
+import Markdown from "react-markdown";
 
 const gradientButtonStyles = {
     background:
@@ -28,6 +32,53 @@ const Body = () => {
     const theme = useTheme();
 
     const isMobile = useMediaQuery(theme.breakpoints.down(768));
+
+    const loadingMessages = [
+        "Summoning the roast master... 🔥",
+        "Brewing some scalding comebacks... ☕",
+        "Sharpening the sarcasm swords... 🗡️",
+        "Preparing the inferno... 🌋",
+        "Judging your code silently... 🤨",
+        "Consulting the Book of Roast... 📖",
+        "Roasting bits and bytes to perfection... 💻🔥",
+        "Downloading some spicy burns... 🌶️",
+        "Your code is in the hot seat... 🪑🔥",
+        "Heating up the feedback furnace... 🛠️🔥",
+        "Deciphering your disasterpiece... 💀📜",
+        "Adding extra spice to the roast... 🧂🔥",
+        "Unleashing the burninator... 🐉🔥",
+        "Cooking up some spicy feedback... 🍳🔥",
+        "Your code is in the roast zone... 🚀🔥",
+    ];
+
+    const [open, setOpen] = useState(false);
+    const [inputCode, setInputCode] = useState("");
+    const [roast, setRoast] = useState(`Don't worry, I've seen worse. Maybe. 
+            Paste your code, and let's find out! 😈`);
+    const [loaderMessage, setLoaderMessage] = useState("");
+
+    const getRandomLoaderMessage = () => {
+        const randomIndex = Math.floor(Math.random() * loadingMessages.length);
+        setLoaderMessage(loadingMessages[randomIndex]);
+    };
+
+    const getRoast = async () => {
+        if (!inputCode) {
+            console.log("Input code is null or empty.");
+            return;
+        }
+        getRandomLoaderMessage();
+        setOpen(true);
+
+        setRoast(
+            await generateRoast(inputCode).catch((error) => {
+                console.log("error: ", error);
+                return "❌ Oops! Something went wrong with the roast.";
+            })
+        );
+
+        setOpen(false);
+    };
 
     return (
         <Stack
@@ -77,14 +128,17 @@ const Body = () => {
                     p: "2%",
                     background: "rgba(138, 43, 226, 0.3)",
                     boxShadow: "0px 4px 10px rgba(75, 0, 130, 0.3)", // Subtle depth
+                    position: "relative",
+                    overflow: "hidden",
                 }}
             >
                 <Stack
                     direction="row"
                     spacing={2}
-                    sx={{ width: "100%", height: "250px" }}
+                    sx={{ width: "100%", maxHeight: "250px" }}
                 >
                     <Avatar
+                        src="/avatar.png"
                         alt="AI"
                         sx={{
                             width: 50,
@@ -103,6 +157,7 @@ const Body = () => {
                             boxShadow: "0px 3px 6px rgba(0, 0, 0, 0.2)",
                             overflowY: "auto",
                             overflowX: "hidden",
+                            minHeight: "100px",
                             maxHeight: "250px",
                             // scrollbarWidth: "thin",
                             "&::-webkit-scrollbar": {
@@ -126,47 +181,30 @@ const Body = () => {
                                 wordBreak: "break-word", // Handles long words
                             }}
                         >
-                            Lorem ipsum dolor sit amet consectetur adipiscing
-                            elit aliquam fusce nisi, facilisi gravida iaculis
-                            pulvinar interdum accumsan magnis a. Fringilla
-                            viverra sociosqu sodales aenean ullamcorper tortor
-                            at vel, dictum congue natoque porta fermentum nibh
-                            placerat curabitur dui, potenti litora ornare
-                            laoreet facilisis felis risus. Nunc rutrum aliquam
-                            lobortis felis posuere suscipit laoreet, pharetra
-                            semper ante lacus velit est vestibulum, varius
-                            interdum mattis urna vulputate curae. Torquent
-                            lobortis quis himenaeos ad at pretium mattis
-                            pellentesque vitae, gravida posuere eros phasellus
-                            egestas risus volutpat feugiat nibh etiam, montes
-                            vivamus quam curabitur cras faucibus vehicula
-                            nullam. Quam primis magnis fermentum aenean integer
-                            vehicula praesent at accumsan, proin cum habitasse
-                            elementum sem a quis magna. A sollicitudin ligula
-                            posuere nostra litora conubia porta orci mi massa
-                            rhoncus, risus hac lobortis cursus tincidunt
-                            interdum nascetur faucibus nisi accumsan cubilia,
-                            convallis venenatis tempor sodales nibh dictum lacus
-                            aenean diam taciti. Orci tellus condimentum morbi id
-                            aenean interdum mi vivamus nisi, inceptos cubilia
-                            nullam nibh enim parturient placerat integer
-                            posuere, bibendum mauris libero quisque senectus
-                            diam magnis porta. Aliquam urna condimentum sapien
-                            netus pharetra dictum id tristique leo cras
-                            imperdiet, integer egestas habitasse venenatis
-                            phasellus nostra sodales natoque montes turpis.
-                            Euismod montes in mauris fringilla diam hac
-                            venenatis habitant imperdiet, feugiat donec litora
-                            inceptos curae netus quisque at erat interdum, per
-                            mattis dignissim habitasse facilisi dictumst vivamus
-                            eu. Lectus ultrices libero porttitor commodo eu diam
-                            eget suspendisse gravida ante, et litora arcu
-                            volutpat rhoncus sociis lacinia ultricies fermentum
-                            primis faucibus, bibendum dapibus venenatis
-                            sollicitudin urna inceptos nibh hendrerit vel.
+                            <Markdown>{roast}</Markdown>
                         </Typography>
                     </Box>
                 </Stack>
+
+                {open && (
+                    <Box
+                        className="row-center"
+                        sx={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            background: "rgba(0,0,0, 0.7)",
+                            gap: "10px",
+                        }}
+                    >
+                        <CircularProgress color="secondary" size={50} />
+                        <Typography variant="subtitle2">
+                            {loaderMessage}
+                        </Typography>
+                    </Box>
+                )}
             </Box>
 
             {/* Code input area */}
@@ -179,16 +217,22 @@ const Body = () => {
                     variant="outlined"
                     multiline
                     rows={9}
-                    placeholder="Paste your code here..."
+                    placeholder="Drop your disasterpiece here and let me roast it to perfection... 🔥 💀"
+                    value={inputCode}
+                    onChange={(e) => setInputCode(e.target.value)}
                     sx={{
                         width: "100%",
                         background: "#1D1D21",
                         borderRadius: "5px",
                         "& .MuiInputBase-input": {
                             color: "#FFFFFF", // Typed text color
+                            fontFamily: "monospace", // Code font
+                            whiteSpace: "pre-wrap", // Preserve whitespace
+                            overflowWrap: "break-word", // Wrap long lines
                         },
                         "& .MuiInputBase-input::placeholder": {
                             color: "rgba(255, 255, 255, 0.8)", // Prominent placeholder color
+                            fontFamily: "monospace", // Code font
                         },
                         "& .MuiOutlinedInput-root": {
                             "& fieldset": {
@@ -208,10 +252,14 @@ const Body = () => {
                     }}
                 />
                 <Box className="row-center" sx={{ gap: "20px" }}>
-                    <Button variant="contained" sx={gradientButtonStyles}>
+                    {/* <Button variant="contained" sx={gradientButtonStyles}>
                         Upload File
-                    </Button>
-                    <Button variant="contained" sx={gradientButtonStyles}>
+                    </Button> */}
+                    <Button
+                        variant="contained"
+                        sx={gradientButtonStyles}
+                        onClick={getRoast}
+                    >
                         Get It Roasted
                     </Button>
                 </Box>

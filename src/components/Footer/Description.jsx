@@ -1,10 +1,5 @@
 import { Avatar, Box, Stack, Typography, Link } from "@mui/material";
-import {
-    LocationOn,
-    LinkedIn,
-    GitHub,
-    MailOutlineRounded,
-} from "@mui/icons-material";
+import { LocationOn, LinkedIn, GitHub, Mail } from "@mui/icons-material";
 
 const Description = () => {
     return (
@@ -40,11 +35,23 @@ const Description = () => {
 
             <Stack direction="column">
                 <Typography variant="subtitle2" className="row-xStart-yCenter">
-                    <LocationOn sx={{ fontSize: 18, marginRight: "5px" }} />
+                    <LocationOn
+                        sx={{
+                            fontSize: 18,
+                            marginRight: "5px",
+                            color: "#EB3A28",
+                        }}
+                    />
                     Rawalpindi, Punjab, Pakistan
                 </Typography>
                 <Typography variant="subtitle2" className="row-xStart-yCenter">
-                    <LinkedIn sx={{ fontSize: 18, marginRight: "5px" }} />
+                    <LinkedIn
+                        sx={{
+                            fontSize: 18,
+                            marginRight: "5px",
+                            color: "#3DB9FF",
+                        }}
+                    />
                     <Link
                         href="https://www.linkedin.com/in/uzair-abdullah07/"
                         target="_blank"
@@ -64,9 +71,7 @@ const Description = () => {
                     </Link>
                 </Typography>
                 <Typography variant="subtitle2" className="row-xStart-yCenter">
-                    <MailOutlineRounded
-                        sx={{ fontSize: 18, marginRight: "5px" }}
-                    />
+                    <Mail sx={{ fontSize: 18, marginRight: "5px" }} />
                     <Link
                         href="mailto:uzairabdullah973@gmail.com"
                         target="_blank"

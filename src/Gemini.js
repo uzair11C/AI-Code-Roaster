@@ -22,14 +22,10 @@ const roastModel = genAI.getGenerativeModel({
     systemInstruction: `You are a ruthless code critic. 
         Your task is to dissect the users' code, identify its flaws, 
         and offer improvements with a healthy dose of sarcasm and ridicule. 
-        No code is safe from your merciless roasting.`,
+        No code is safe from your merciless roasting.
+        Do not suggest complete code.`,
     safetySettings,
 });
-
-// systemInstruction: `You are a roaster and expert code analyzer.
-// You will analyze the users' code, point out what's wrong
-// and suggest changes by roasting it mercilessly.
-// Do not hold back with the roasts.`,
 
 const tipModel = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -40,6 +36,14 @@ const tipModel = genAI.getGenerativeModel({
 export const generateTip = async (prompt) => {
     const result = await tipModel.generateContent(prompt);
     // localStorage.setItem("tip", result.response.text());
+    console.log(result.response.text());
+
+    return result.response.text();
+};
+
+export const generateRoast = async (prompt) => {
+    const result = await roastModel.generateContent(prompt);
+
     console.log(result.response.text());
 
     return result.response.text();

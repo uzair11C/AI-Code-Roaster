@@ -9,15 +9,16 @@ const RoastHeader = () => {
                 fontWeight={700}
                 textAlign="center"
             >
-                🔥 Code Roast Central 🌟 🖥️ 🧑‍💻
+                🔥 Code Roast Central 🌟 🍠 🔥 💀
             </Typography>
             <Typography
                 variant="h5"
                 component="h3"
-                fontWeight={700}
+                fontWeight={500}
                 textAlign="center"
             >
-                &quot;Where bugs meet their match!&quot;
+                &quot;Where your code gets grilled to perfection (or charred to
+                ashes)!&quot;
             </Typography>
         </Box>
     );
