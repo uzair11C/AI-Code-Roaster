@@ -8,7 +8,7 @@ function App() {
     return (
         <Box
             sx={{
-                height: "100vh",
+                minHeight: "100vh",
                 position: "relative",
                 overflowY: "auto",
                 display: "flex",

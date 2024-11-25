@@ -29,13 +29,14 @@ const roastModel = genAI.getGenerativeModel({
 
 const tipModel = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
-    systemInstruction: `You are a coding tip generator. 
-    Provide a daily tip to improve coding practices.`,
+    systemInstruction: `You are a coding tip generator with a dash of humor. 
+    Provide a daily tip that's both informative and entertaining to improve 
+    coding practices with a smile.`,
 });
 
 export const generateTip = async (prompt) => {
     const result = await tipModel.generateContent(prompt);
-    // localStorage.setItem("tip", result.response.text());
+    localStorage.setItem("tipOfDay", result.response.text());
     console.log(result.response.text());
 
     return result.response.text();
@@ -48,3 +49,39 @@ export const generateRoast = async (prompt) => {
 
     return result.response.text();
 };
+
+// export const generateFileRoast = async (file) => {
+//     try {
+//         // Convert file to FileData format that Gemini expects
+//         const fileData = {
+//             inlineData: {
+//                 data: await fileToBase64(file),
+//                 mimeType: file.type,
+//             },
+//         };
+
+//         const result = await roastModel.generateContent([
+//             fileData,
+//             "Roast this code",
+//         ]);
+//         console.log(result.response.text());
+//         return result.response.text();
+//     } catch (error) {
+//         console.error("Error generating file roast:", error);
+//         throw error;
+//     }
+// };
+
+// // Helper function to convert File to base64
+// const fileToBase64 = (file) => {
+//     return new Promise((resolve, reject) => {
+//         const reader = new FileReader();
+//         reader.readAsDataURL(file);
+//         reader.onload = () => {
+//             // Remove the "data:*/*;base64," prefix
+//             const base64 = reader.result.split(",")[1];
+//             resolve(base64);
+//         };
+//         reader.onerror = (error) => reject(error);
+//     });
+// };

@@ -74,6 +74,36 @@ const Footer = () => {
                 </Box>
             </Box>
             <Typography variant="body2">Created by Uzair Abdullah</Typography>
+
+            <Typography
+                variant="body1"
+                className="row-center"
+                sx={{ gap: "5px" }}
+            >
+                Powered by{" "}
+                <Typography
+                    variant="body1"
+                    fontWeight={700}
+                    className="row-center"
+                    sx={{
+                        background: `linear-gradient(74deg, #4285f4 0, #9b72cb 9%, 
+                        #d96570 20%, #d96570 24%, 
+                        #9b72cb 35%, #4285f4 44%, #9b72cb 50%, #d96570 56%,
+                        #1e1f20, 75%, #1e1f20 100%)`,
+                        backgroundSize: "400% 100%",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        gap: "2px",
+                    }}
+                >
+                    <img
+                        src="/gemini_favicon.png"
+                        alt="geminiFavicon"
+                        width="22px"
+                    />{" "}
+                    Gemini 1.5 Flash
+                </Typography>
+            </Typography>
         </Box>
     );
 };

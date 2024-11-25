@@ -109,11 +109,11 @@ const Body = () => {
                 )
             }
             sx={{
-                height: "300px",
+                height: "320px",
                 width: "100%",
                 gap: "20px",
                 boxSizing: "border-box",
-                p: "0 5%",
+                p: "0 3%",
             }}
         >
             {/* Roast area */}
@@ -121,7 +121,7 @@ const Body = () => {
                 className="column-left"
                 sx={{
                     width: "100%",
-                    minHeight: "290px",
+                    minHeight: "320px",
                     border: "1px solid #D000FF",
                     borderRadius: "5px",
                     boxSizing: "border-box",
@@ -158,7 +158,7 @@ const Body = () => {
                             overflowY: "auto",
                             overflowX: "hidden",
                             minHeight: "100px",
-                            maxHeight: "250px",
+                            maxHeight: "270px",
                             // scrollbarWidth: "thin",
                             "&::-webkit-scrollbar": {
                                 width: "5px", // For Chrome, Safari, and Opera
