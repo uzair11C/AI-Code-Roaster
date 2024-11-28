@@ -109,7 +109,7 @@ const Body = () => {
                 )
             }
             sx={{
-                height: "320px",
+                // height: "320px",
                 width: "100%",
                 gap: "20px",
                 boxSizing: "border-box",

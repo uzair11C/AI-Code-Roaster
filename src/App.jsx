@@ -13,7 +13,7 @@ function App() {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-evenly",
+                justifyContent: "flex-start",
                 alignItems: "center",
                 "&::before": {
                     content: '""',
